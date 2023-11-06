@@ -1,12 +1,10 @@
 import {
   View,
   Text,
-  StyleSheet,
   Modal,
   Pressable,
   TextInput,
   ScrollView,
-  Image,
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import React, { useState } from "react";
@@ -14,6 +12,8 @@ import { Picker } from "@react-native-picker/picker";
 import { Calendar } from "react-native-calendars";
 import * as DocumentPicker from "expo-document-picker";
 import { eachDayOfInterval, format } from "date-fns";
+import styles from "./styles";
+import AssignedToModal from "./AssignedToModal";
 
 export default function MyModal({ modalVisible, setModalVisible }) {
   const [selectedValue, setSelectedValue] = useState();
@@ -105,15 +105,17 @@ export default function MyModal({ modalVisible, setModalVisible }) {
             </View>
             <View style={styles.titleContainer}>
               <Text style={styles.title}>Faster Pay</Text>
-              <Picker
-                selectedValue={selectedValue}
-                onValueChange={(itemValue) => setSelectedValue(itemValue)}
-                style={styles.picker}
-              >
-                <Picker.Item label="ASAP" value="asap" />
-                <Picker.Item label="Medium" value="medium" />
-                <Picker.Item label="Low" value="Low" />
-              </Picker>
+              <View style={styles.pickerContainer}>
+                <Picker
+                  style={{ width: 133, height: 50 }}
+                  selectedValue={selectedValue}
+                  onValueChange={(itemValue) => setSelectedValue(itemValue)}
+                >
+                  <Picker.Item label="ASAP" value="asap" />
+                  <Picker.Item label="Medium" value="medium" />
+                  <Picker.Item label="Low" value="Low" />
+                </Picker>
+              </View>
             </View>
           </View>
           <ScrollView style={styles.contentContainer}>
@@ -238,214 +240,10 @@ export default function MyModal({ modalVisible, setModalVisible }) {
         </View>
         {secondModalVisible && <View style={styles.blurView} />}
       </Modal>
-
-      <Modal
-        animationType="slide"
-        transparent={true}
-        visible={secondModalVisible}
-        onRequestClose={() => {
-          setSecondModalVisible(!secondModalVisible);
-        }}
-      >
-        <View style={styles.secondModalView}>
-          <Pressable onPress={() => setSecondModalVisible(!secondModalVisible)}>
-            <Ionicons name="close-outline" size={24} color="black" />
-          </Pressable>
-          <View style={styles.innerView}>
-            <Text style={styles.assignedToText}>Assign to</Text>
-            <View style={styles.searchBox}>
-              <Ionicons name="search" size={20} color="#000" />
-              <TextInput placeholder="Name or email" style={styles.input} />
-            </View>
-            <Text
-              style={{
-                fontWeight: "500",
-                fontSize: 20,
-                paddingTop: 15,
-              }}
-            >
-              Recently
-            </Text>
-            <View styles={styles.recently}>
-              <Pressable style={styles.recentlyPerson}>
-                <Image
-                  source={{ uri: "https://th.bing.com/th/id/OIG.EzrRSf75H_zeADwjUA8.?pid=ImgGn" }}
-                  style={styles.photo}
-                />
-                <View style={styles.nameEmailView}>
-                  <Text style={styles.nameText}>James J.</Text>
-                  <Text style={styles.emailText}>james.jones@gmail.com</Text>
-                </View>
-              </Pressable>
-            </View>
-          </View>
-        </View>
-      </Modal>
+      <AssignedToModal
+        secondModalVisible={secondModalVisible}
+        setSecondModalVisible={setSecondModalVisible}
+      />
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  centeredView: {
-    flex: 1,
-    backgroundColor: "#f4f5f7",
-  },
-  modalView: {
-    height: "100%",
-    backgroundColor: "#fff",
-    borderRadius: 50,
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 4,
-    elevation: 5,
-  },
-  blurView: {
-    position: "absolute",
-    top: 0,
-    bottom: 0,
-    left: 0,
-    right: 0,
-    backgroundColor: "rgba(0, 0, 0, 0.5)",
-  },
-  secondModalView: {
-    position: "absolute",
-    bottom: 0,
-    width: "100%",
-    height: "50%",
-    backgroundColor: "#fff",
-    borderTopLeftRadius: 30,
-    borderTopRightRadius: 30,
-    paddingHorizontal: 20,
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 4,
-    elevation: 5,
-  },
-  header: {
-    backgroundColor: "#f4f5f7",
-    flexDirection: "column",
-    borderRadius: 25,
-    paddingLeft: 20,
-    paddingTop: 20,
-  },
-  backButtonContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-    backgroundColor: "#f4f5f7",
-    borderRadius: 25,
-    paddingBottom: 20,
-  },
-  backButton: {
-    borderRadius: 50,
-  },
-  modalText: {
-    fontSize: 17,
-  },
-  titleContainer: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-  },
-  title: {
-    fontSize: 30,
-    fontWeight: "bold",
-    marginRight: 10,
-  },
-  picker: {
-    width: 117,
-    height: 25,
-    borderRadius: 25,
-    borderWidth: 3,
-    borderColor: "black",
-  },
-  section: {
-    fontSize: 17,
-    marginTop: 10,
-    padding: 15,
-  },
-  contentContainer: {
-    margin: 20,
-    backgroundColor: "#fff",
-  },
-  textContainer: {
-    margin: 10,
-    flexDirection: "column",
-  },
-  addContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-  },
-  person: {
-    flexDirection: "row",
-    flex: 0,
-    backgroundColor: "#ebfeeb",
-    borderRadius: 25,
-    padding: 10,
-    marginRight: 10,
-  },
-  text: {
-    fontSize: 20,
-    fontWeight: "bold",
-  },
-  innerView: {
-    flex: 1,
-    flexDirection: "column",
-    paddingHorizontal: 10,
-    paddingTop: 10,
-  },
-  assignedToText: {
-    fontSize: 23,
-    fontWeight: "500",
-  },
-  searchBox: {
-    marginTop: 15,
-    padding: 10,
-    flexDirection: "row",
-    alignItems: "center",
-    marginVertical: 10,
-    paddingHorizontal: 20,
-    paddingVertical: 15,
-    backgroundColor: "#f4f5f7",
-    borderRadius: 30,
-  },
-  input: {
-    flex: 1,
-    marginLeft: 10,
-    fontWeight: "300",
-    fontSize: 20,
-  },
-  recently: {
-    backgroundColor: "blue",
-    flexDirection: "row",
-    alignItems: "center",
-    marginTop: 10,
-  },
-  photo: {
-    width: 50,
-    height: 50,
-    borderRadius: 50,
-  },
-  recentlyPerson: {
-    alignItems: "center",
-    flexDirection: "row",
-    marginTop: 10,
-  },
-  nameEmailView: {
-    marginLeft: 10,
-  },
-  nameText: {
-    fontSize: 16,
-    fontWeight: "bold",
-  },
-  emailText: {
-    fontSize: 14,
-    color: "#888",
-  },
-});

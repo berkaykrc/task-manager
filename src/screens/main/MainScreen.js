@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import MyModal from "./components/MyModal";
 import { View, Pressable, StyleSheet } from "react-native";
 import { FontAwesome5 } from "@expo/vector-icons";
+import styles from "./styles";
 
 function MainScreen() {
   const [modalVisible, setModalVisible] = useState(false);
@@ -15,25 +16,5 @@ function MainScreen() {
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  button: {
-    position: "absolute",
-    bottom: 100,
-    right: 20,
-    backgroundColor: "#212121",
-    borderRadius: 50,
-    width: 60,
-    height: 60,
-    alignItems: "center",
-    justifyContent: "center",
-    elevation: 5,
-  },
-});
 
 export { MainScreen };
