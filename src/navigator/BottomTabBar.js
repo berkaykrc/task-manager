@@ -46,7 +46,10 @@ function BottomTabBarNavigator() {
         },
       })}
     >
-      <Tab.Screen name="Main" component={MainScreen} />
+      <Tab.Screen
+        name="Main"
+        component={MainScreen}
+      />
       <Tab.Screen name="Calendar" component={CalendarScreen} />
       <Tab.Screen name="Notification" component={NotificationScreen} />
       <Tab.Screen name="Message" component={MessageScreen} />
