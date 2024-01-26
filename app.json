@@ -20,11 +20,19 @@
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
-      }
+        "backgroundColor": "#ffffff",
+        "package": "com.taskmanager.app",
+        "googleServicesFile": "./google-services.json"
+      },
+      "package": "com.berkaykrc.taskmanager"
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "ca684f3f-8d06-4b3f-83e2-573e3f6c49db"
+      }
     }
   }
 }

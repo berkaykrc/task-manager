@@ -29,7 +29,7 @@ function Task({ task }) {
       <Text style={styles.description}>{task.description}</Text>
       <View style={styles.bottomRow}>
         <MaterialCommunityIcons name="timer" size={24} color="black" />
-        <Text>{task.minute} min</Text>
+        <Text>{task.duration}</Text>
         {/* Replace this with the actual images */}
         {task.assignedPeople &&
           task.assignedPeople.map((person, index) => (

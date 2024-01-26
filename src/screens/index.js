@@ -4,3 +4,4 @@ export { MessageScreen } from "./message/MessageScreen";
 export { NotificationScreen } from "./notification/NotificationScreen";
 export { GoalsScreen } from "./main/GoalsScreen";
 export { ProjectsScreen } from "./main/ProjectsScreen";
+export { AuthScreen } from "./auth/AuthScreen";

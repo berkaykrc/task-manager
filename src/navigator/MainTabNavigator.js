@@ -13,7 +13,6 @@ export function MainTabNavigator() {
         tabBarIndicatorStyle: {
           backgroundColor: "#000",
         },
-        
       }}
     >
       <MainTab.Screen name="Projects" component={ProjectsScreen} />

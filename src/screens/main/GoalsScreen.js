@@ -4,10 +4,11 @@ import { ScrollView, View } from "react-native";
 import styles from "./styles";
 import FilterButtons from "./components/FilterButtons";
 import Task from "./components/Task";
+import axios from "axios";
 
 function GoalsScreen() {
   const [tasks, setTasks] = useState({
-    "2023-11-06": [
+    /*     "2023-11-06": [
       {
         name: "Task 1",
         minute: 30,
@@ -54,7 +55,7 @@ function GoalsScreen() {
         priority: "Medium",
         status: "Done",
       },
-    ],
+    ], */
   });
 
   const [activeFilter, setActiveFilter] = useState("To Do");
@@ -63,16 +64,34 @@ function GoalsScreen() {
     setActiveFilter(filter);
   };
 
-  const filteredTasks = Object.values(tasks)
+  /*   const filteredTasks = Object.values(tasks)
     .flat()
-    .filter((task) => task.status === activeFilter);
+    .filter((task) => task.status === activeFilter); */
+
+  useEffect(() => {
+    axios
+      .get("https://whbdd2vx-8000.euw.devtnpmunnels.ms/tasks/", {
+        headers: {
+          Accept: "application/json",
+        },
+      })
+      .then((res) => {
+        setTasks(res.data);
+        console.log(res.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching tasks:", error);
+        // You can set tasks to an empty array or handle the error in some other way
+        setTasks([]);
+      });
+  }, []);
 
   return (
     <View style={styles.container}>
       <FilterButtons onFilterChange={handleFilterChange} />
       <ScrollView style={{ flex: 1, marginBottom: 90 }}>
-        {filteredTasks &&
-          filteredTasks.map((task, index) => <Task key={index} task={task} />)}
+        {/* {filteredTasks &&
+          filteredTasks.map((task, index) => <Task key={index} task={task} />)} */}
       </ScrollView>
     </View>
   );
