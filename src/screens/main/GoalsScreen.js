@@ -81,7 +81,6 @@ function GoalsScreen() {
       })
       .catch((error) => {
         console.error("Error fetching tasks:", error);
-        // You can set tasks to an empty array or handle the error in some other way
         setTasks([]);
       });
   }, []);

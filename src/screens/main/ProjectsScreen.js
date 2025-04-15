@@ -1,6 +1,6 @@
 //projects screen
 import React, { useState } from "react";
-import { View, Text } from "react-native";
+import { View } from "react-native";
 import styles from "./styles";
 import FilterButtons from "./components/FilterButtons";
 
